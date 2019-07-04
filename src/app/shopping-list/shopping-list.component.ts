@@ -28,5 +28,6 @@ export class ShoppingListComponent implements OnInit {
         this.ingredients = ingredients;
       }
     );
+    console.log(this.ingredients);
   }
 }
