@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { Recipe } from "../recipe.model";
+import { RecipeService } from "../recipe.service";
 import { ShoppingListService } from "src/app/shopping-list/shopping-list.service";
+import { ActivatedRoute, Params } from "@angular/router";
 
 @Component({
   selector: "app-recipe-detail",
@@ -9,11 +11,18 @@ import { ShoppingListService } from "src/app/shopping-list/shopping-list.service
   styleUrls: ["./recipe-detail.component.css"]
 })
 export class RecipeDetailComponent implements OnInit {
-  @Input() recipe: Recipe;
+  recipe: Recipe;
+  id: number;
+  constructor(
+    private shoppingService: ShoppingListService,
+    private route: ActivatedRoute
+  ) {}
 
-  constructor(private shoppingService: ShoppingListService) {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe((newParams: Params) => {
+      this.id = +newParams["id"];
+    });
+  }
 
   toShoppingService() {
     // You could do it this way but you emit to many events since you call .addIngredient for each
