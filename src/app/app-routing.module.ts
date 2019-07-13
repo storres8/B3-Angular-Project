@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { RecipesComponent } from "./recipes/recipes.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
+import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
 
 const appRoutes: Routes = [
   // we all the pathMatch:'full' parameter to the object where we are redirecting b/c we want to make sure
@@ -11,7 +12,10 @@ const appRoutes: Routes = [
   {
     path: "recipes",
     component: RecipesComponent,
-    children: [{ path: "", component: RecipeStartComponent }]
+    children: [
+      { path: "", component: RecipeStartComponent },
+      { path: ":id", component: RecipeDetailComponent }
+    ]
   },
   { path: "shopping-list", component: ShoppingListComponent }
 ];
