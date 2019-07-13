@@ -15,12 +15,14 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
   constructor(
     private shoppingService: ShoppingListService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private recipeService: RecipeService
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((newParams: Params) => {
       this.id = +newParams["id"];
+      this.recipe = this.recipeService.getRecipe(this.id);
     });
   }
 
