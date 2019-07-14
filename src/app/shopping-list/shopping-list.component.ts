@@ -11,7 +11,7 @@ import { Subscription } from "rxjs";
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[];
-  private igChangeSub: Subscription;
+  private subscription: Subscription;
 
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -25,7 +25,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     // from the shopping-list service whenever we add a new ingridient into the array. This new array
     // of ingridients is then sent here since we are subscribed and we then set the ingredients
     // property of this component equal to the newly emmited array of ingredients.
-    this.igChangeSub = this.shoppingListService.ingredientsChanged.subscribe(
+    this.subscription = this.shoppingListService.ingredientsChanged.subscribe(
       (ingredients: Ingredient[]) => {
         this.ingredients = ingredients;
       }
@@ -34,6 +34,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.igChangeSub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
