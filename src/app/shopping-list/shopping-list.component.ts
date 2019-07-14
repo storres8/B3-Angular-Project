@@ -1,15 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "./shopping-list.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-shopping-list",
   templateUrl: "./shopping-list.component.html",
   styleUrls: ["./shopping-list.component.css"]
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[];
+  private igChangeSub: Subscription;
 
   constructor(private shoppingListService: ShoppingListService) {}
 
@@ -23,11 +25,15 @@ export class ShoppingListComponent implements OnInit {
     // from the shopping-list service whenever we add a new ingridient into the array. This new array
     // of ingridients is then sent here since we are subscribed and we then set the ingredients
     // property of this component equal to the newly emmited array of ingredients.
-    this.shoppingListService.ingredientsChanged.subscribe(
+    this.igChangeSub = this.shoppingListService.ingredientsChanged.subscribe(
       (ingredients: Ingredient[]) => {
         this.ingredients = ingredients;
       }
     );
     console.log(this.ingredients);
+  }
+
+  ngOnDestroy() {
+    this.igChangeSub.unsubscribe();
   }
 }
