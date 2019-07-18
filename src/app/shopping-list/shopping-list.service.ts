@@ -21,6 +21,10 @@ export class ShoppingListService {
     return this.ingredients.slice();
   }
 
+  getIngredient(index: number) {
+    return this.ingredients[index];
+  }
+
   // Upon adding a new ingredient we re-copy our ingredients array and send as an event to the
   // shopping-list component this new updated ingridient array to be rendered. That way our
   // original array does not get mutated directly.
