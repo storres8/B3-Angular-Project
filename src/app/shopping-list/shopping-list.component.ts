@@ -33,6 +33,12 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     console.log(this.ingredients);
   }
 
+  onEditItem(index: number) {
+    // passing on the index of the ingredient that we click to the shopping list service through a
+    // subject, which will eventually get sent to the shopping-list edit componet.
+    this.shoppingListService.startedEditing.next(index);
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
