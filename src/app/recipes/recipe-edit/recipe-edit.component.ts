@@ -58,7 +58,6 @@ export class RecipeEditComponent implements OnInit {
   }
 
   getControls() {
-    console.log(this.recipeForm);
     return (<FormArray>this.recipeForm.get("recipieIngredients")).controls;
   }
 
