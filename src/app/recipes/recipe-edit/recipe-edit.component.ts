@@ -80,6 +80,8 @@ export class RecipeEditComponent implements OnInit {
 
   onDeleteIngredient(index: number) {
     (<FormArray>this.recipeForm.get("ingredients")).removeAt(index);
+    //In Angular 8 you can also clear all items in a Form Array with the .clear() method.
+    // clear() automatically loops through all registered FormControls or Formgroups and removes them.
   }
 
   onSubmit() {
